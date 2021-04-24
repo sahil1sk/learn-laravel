@@ -8,26 +8,9 @@ Route::get('/', function () {
 });
 
 Route::get('about-us', function () {
-
-
-    // Return data using compact
-    // $title = 'Welcome To Laravel';
-    // return view('pages.index', compact('title'));
-
-    // Return data using with
-    // $title = 'About Us';
-    // return view('pages.about')->with('title', $title);
-
-    // sending multiple data keys using with
-    $data = array(
-        'title' => "About Us",
-        'names' => ['Web Design', 'Programming', 'SEO']
-    );
-    return view('about')->with($data);
-
-    // sending data directly
-    // return view('about', ["title" => "Title", "name" => "name"]);
+    return view('about');
 });
 
-// controller, router name, data which we pass
-Route::view("about", "about", ["title" => "Title", 'names' => ['Web Design', 'Programming', 'SEO']]);
+Route::get('products', function () {
+    return view('products');
+});

@@ -1,10 +1,7 @@
-@include('partials.header')
+@extends('layouts.app')
 
-<h1>{{$title}}</h1>
-<h3>A Simple view File</h3>
-@csrf
+@section('title', "About Us Page")
 
-<script>
-    var names = @json($title);
-    console.log(names);
-</script>
+@section('content')
+    <h1>Welcome to About us page.</h1>
+@endsection
