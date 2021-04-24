@@ -21,7 +21,7 @@ Route::get('about-us', function () {
     // sending multiple data keys using with
     $data = array(
         'title' => "About Us",
-        'about' => ['Web Design', 'Programming', 'SEO']
+        'names' => ['Web Design', 'Programming', 'SEO']
     );
     return view('about')->with($data);
 
@@ -30,4 +30,4 @@ Route::get('about-us', function () {
 });
 
 // controller, router name, data which we pass
-Route::view("about", "about", ["title" => "Title", "name" => "name"]);
+Route::view("about", "about", ["title" => "Title", 'names' => ['Web Design', 'Programming', 'SEO']]);
