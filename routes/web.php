@@ -7,30 +7,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("services/{id}", function($id) {
-    echo "<h1>ID: $id </h1>";
-})->where("id", "[0-9]+"); // id will accept only integer values
-
-Route::get("services/{id}/{name}", function($id, $name) {
-    echo "<h1>ID: $id </h1>";
-    echo "<h1>Name: $name </h1>";
-})->where(["id" => "[0-9]+", "name" => "[a-zA-Z]+"]); // name contains only a to z characters not integers 
+Route::get('about-us', function () {
 
 
-Route::get("/list-view", function() {
-    echo "<h1>This is list view page</h1>";
+    // Return data using compact
+    // $title = 'Welcome To Laravel';
+    // return view('pages.index', compact('title'));
+
+    // Return data using with
+    // $title = 'About Us';
+    // return view('pages.about')->with('title', $title);
+
+    // sending multiple data keys using with
+    $data = array(
+        'title' => "About Us",
+        'about' => ['Web Design', 'Programming', 'SEO']
+    );
+    return view('about')->with($data);
+
+    // sending data directly
+    // return view('about', ["title" => "Title", "name" => "name"]);
 });
 
-Route::get("/add-form", function() {
-    return redirect("/list-view");
-});
-
-
-Route::get("/about-us", function() {
-    echo "<h1>This is simple message </h1>";
-});
-
-Route::redirect("/products", "/about-us");
-
-// ? helps to set it as optional parameter
-Route::get('/first/{id?}', [Site::class, "first"]); 
+// controller, router name, data which we pass
+Route::view("about", "about", ["title" => "Title", "name" => "name"]);
