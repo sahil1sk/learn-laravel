@@ -17,7 +17,9 @@ Route::get('about-us', function () {
 // Route::get("add-student", [StudentController::class, "myForm"]);
 // Route::post("submit-student", [StudentController::class, "submitStudent"]);
 // match helps to match any of the request type
-Route::match(["get", "post"], "add-student", [StudentController::class, "myForm"]);
+// Route::match(["get", "post"], "add-student", [StudentController::class, "myForm"]);
+Route::get("add-student", [StudentController::class, "addStudent"]);
+Route::post("submit-data", [StudentController::class, "submitData"]);
 
 Route::get('products', function () {
     return view('products', [

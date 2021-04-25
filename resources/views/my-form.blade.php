@@ -8,7 +8,7 @@
     </ul>
 @endif
 
-<form action="add-student" method="POST">
+<form action="submit-data" method="POST">
     @csrf
     <p>Name: <input type="text" name="name" placeholder="Enter name"></p>
     @error('name')
