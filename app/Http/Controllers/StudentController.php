@@ -25,7 +25,7 @@ class StudentController extends Controller
         
         if($validate->fails()) {
             // if not validated then we will redirect to the page with errors
-            return redirect("add-student")->withErrors($validate);
+            return redirect("add-student")->withErrors($validate)->withInput(); // ->withInput() helps to send the old input value which we are able then it will used in old function 
         }
 
         print_r($req->all());
