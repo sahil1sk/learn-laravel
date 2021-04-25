@@ -8,9 +8,13 @@ Route::get('/', function () {
 });
 
 Route::get('about-us', function () {
-    return view('about');
+    return view('about', [
+        "page" => "About Us"
+    ]);
 });
 
 Route::get('products', function () {
-    return view('products');
+    return view('products', [
+        "page" => "Product"
+    ]);
 });
