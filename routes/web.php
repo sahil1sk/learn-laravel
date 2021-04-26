@@ -21,6 +21,8 @@ Route::get('about-us', function () {
 Route::get("add-student", [StudentController::class, "addStudent"]);
 Route::post("submit-data", [StudentController::class, "submitData"]);
 
+Route::get("users", [StudentController::class, "get_users"]);
+
 Route::get('products', function () {
     return view('products', [
         "page" => "Product"

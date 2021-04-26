@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreStudentData;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -53,5 +54,40 @@ class StudentController extends Controller
 
     public function submitStudent(Request $request) {
         print_r($request->input("name"));
+    }
+
+    public function get_users() {
+        $users = DB::select("SELECT * FROM tbl_users WHERE id = :id", ["id" => 2]);
+
+        // echo "<pre>";
+        // print_r($users);
+        foreach ($users as $user) {
+            echo $user->name . "<br>";
+        }
+    }
+
+    public function insert_user() {
+        $user = DB::insert("Insert into tbl_users (name, email, phone_no) values (:name, :email, :phone_no)", 
+        [
+            "name" => "Aman",
+            "email" => "email@gmail.com",
+            "phone_no" => "1234567888"
+        ]);
+        print_r($user);
+    }
+
+    public function update_user() {
+        $user = DB::update("update tbl_users SET email = :email WHERE id = :id", [
+            "id" => 1,
+            "email" => "sanjay_kumar@gmail.com"
+        ]);
+        print_r($user);
+    }
+
+    public function delete_user() {
+        $user = DB::delete("DELETE FROM tbl_users WHERE id = :id", [
+            "id" => 3,
+        ]);
+        print_r($user);
     }
 }
