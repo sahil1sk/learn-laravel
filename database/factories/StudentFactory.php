@@ -25,13 +25,13 @@ class StudentFactory extends Factory
             "name" => $this->faker->name(),
             "email" => $this->faker->safeEmail,
             "mobile" => $this->faker->phoneNumber,
-            "age" => $this->faker->numberBetween(25, 45),
-            "gender" => $this->faker->randomElement([
-                "male",
-                "female",
-                "others"
-            ]),
-            "address_info" => $this->faker->address
+            // "age" => $this->faker->numberBetween(25, 45),
+            // "gender" => $this->faker->randomElement([
+            //     "male",
+            //     "female",
+            //     "others"
+            // ]),
+            // "address_info" => $this->faker->address
         ];
     }
 }

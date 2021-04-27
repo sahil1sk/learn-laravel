@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreStudentData;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Models\Student;
 
 class StudentController extends Controller
 {
@@ -90,4 +91,19 @@ class StudentController extends Controller
         ]);
         print_r($user);
     }
+
+    public function addStudentByModel() {
+        return view("my-form");
+    }
+
+    public function submitDataByModel(Request $request) {
+        print_r($request->all());
+        $student_obj = new Student;
+        $student_obj->name = $request->name;
+        $student_obj->email = $request->email;
+        $student_obj->mobile = $request->mobile;
+
+        $student_obj->save();
+    }
+
 }

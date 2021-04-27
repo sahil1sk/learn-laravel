@@ -8,7 +8,7 @@
     </ul>
 @endif
 
-<form action="submit-data" method="POST">
+<form action="submitting-data" method="POST">
     @csrf
     {{-- {{ old("name") }}  Helps to set the old values --}}
     <p>Name: <input type="text" value="{{ old("name") }}" name="name" placeholder="Enter name"></p>

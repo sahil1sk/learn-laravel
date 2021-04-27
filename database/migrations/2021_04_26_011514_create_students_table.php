@@ -18,9 +18,9 @@ class CreateStudentsTable extends Migration
             $table->string("name", 120);
             $table->string("email", 50)->nullable();
             $table->string("mobile", 20)->nullable();
-            $table->integer("age")->default(1);
-            $table->text("address_info")->comment("Please provide you full address");
-            $table->enum("gender", ["male", "female", "others"]);
+            // $table->integer("age")->default(1);
+            // $table->text("address_info")->comment("Please provide you full address");
+            // $table->enum("gender", ["male", "female", "others"]);
             $table->timestamp("created_at")->useCurrent(); // useCurrent() help to use current date and time
             $table->timestamp("updated_at")->useCurrent(); // useCurrent() help to use current date and time
         });

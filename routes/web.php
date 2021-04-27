@@ -23,6 +23,11 @@ Route::post("submit-data", [StudentController::class, "submitData"]);
 
 Route::get("users", [StudentController::class, "get_users"]);
 
+Route::get("adding-student", [StudentController::class, "addStudentByModel"]);
+Route::post("submitting-data", [StudentController::class, "submitDataByModel"]);
+
+
+
 Route::get('products', function () {
     return view('products', [
         "page" => "Product"

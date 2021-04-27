@@ -21,13 +21,13 @@ class StudentSeeder extends Seeder
             "name" => $faker->name(),
             "email" => $faker->safeEmail,
             "mobile" => $faker->phoneNumber,
-            "age" => $faker->numberBetween(25, 45),
-            "gender" => $faker->randomElement([
-                "male",
-                "female",
-                "others"
-            ]),
-            "address_info" => $faker->address,
+            // "age" => $faker->numberBetween(25, 45),
+            // "gender" => $faker->randomElement([
+            //     "male",
+            //     "female",
+            //     "others"
+            // ]),
+            // "address_info" => $faker->address,
             // "password" => Hash::make("123455"),  // helps to create hash password
         ]);
     }
