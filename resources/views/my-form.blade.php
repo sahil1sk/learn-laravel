@@ -8,6 +8,10 @@
     </ul>
 @endif
 
+@if (session()->has("success"))
+    <h3>{{ session("success") }}</h3>
+@endif
+
 <form action="submitting-data" method="POST">
     @csrf
     {{-- {{ old("name") }}  Helps to set the old values --}}

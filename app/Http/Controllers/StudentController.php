@@ -92,18 +92,24 @@ class StudentController extends Controller
         print_r($user);
     }
 
+    // ------------- Using Model
+
     public function addStudentByModel() {
         return view("my-form");
     }
 
     public function submitDataByModel(Request $request) {
-        print_r($request->all());
+        // print_r($request->all());
         $student_obj = new Student;
         $student_obj->name = $request->name;
         $student_obj->email = $request->email;
         $student_obj->mobile = $request->mobile;
 
         $student_obj->save();
-    }
 
+        // set flash message
+        // session()->flash("key", "message");
+        $request->session()->flash("success", "Student has been created successfully");
+        return redirect("adding-student");
+    }
 }
