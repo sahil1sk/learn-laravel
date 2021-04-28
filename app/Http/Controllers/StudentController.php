@@ -33,7 +33,17 @@ class StudentController extends Controller
 
         // $students = DB::table("students")->whereBetween("id", [0, 1])->get();
 
-        $students = DB::table("students")->whereIn("id", [0, 1, 2,5])->get();
+        // $students = DB::table("students")->whereIn("id", [0, 1, 2,5])->get();
+
+        // joining the table by using the student id and course std_id
+        $students = DB::table("students")->select("students.id", "students.name as student_name", "courses.name", "courses.id")->join("courses", "students.id", "=", "courses.student_id")->get();
+
+        // leftJoin means it will go to left side table first which here is students than to other means first select all the rows of left side table than join with right side table
+        $students = DB::table("students")->select("students.id", "students.name as student_name", "courses.name", "courses.id")->leftJoin("courses", "students.id", "=", "courses.student_id")->get();
+
+        // now in right join it will take the right table first which here is courses
+        $students = DB::table("students")->select("students.id", "students.name as student_name", "courses.name", "courses.id")->rightJoin("courses", "students.id", "=", "courses.student_id")->get();
+
 
         echo "<pre>";
         print_r($students);
