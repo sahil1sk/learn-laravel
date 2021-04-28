@@ -15,6 +15,33 @@ class StudentController extends Controller
     }
 
     // ------- QUERY BUILDER
+    public function insertStudent() {
+        //  DB::table("students")->insert([
+        //     "name" => "Sanjay",
+        //     "email" => "test@gmail.com",
+        //     "mobile" => "99999999222",
+        // ]);
+
+        // $insertedId = DB::table("students")->insertGetId([
+        //     "name" => "Sanjay",
+        //     "email" => "test@gmail.com",
+        //     "mobile" => "99999999222",
+        // ]);
+
+        // DB::table("students")->insert([
+        //     ["name" => "A", "email" => "add@.com", "mobile" => "9459848548"],
+        //     ["name" => "B", "email" => "bdd@.com", "mobile" => "9459848548"],
+        //     ["name" => "C", "email" => "cdd@.com", "mobile" => "9459848548"],
+        // ]);
+
+        DB::table("students")->where("id", 2)->update([
+            "name" => "Updated Value",
+            "email" => "Updated email"
+        ]);
+
+        echo "Data has been updated";
+    }
+
     public function listStudents() {
         // $students = DB::table("students")->where("id", 1)->select("name", "email as email_address")->get();
 
@@ -36,14 +63,13 @@ class StudentController extends Controller
         // $students = DB::table("students")->whereIn("id", [0, 1, 2,5])->get();
 
         // joining the table by using the student id and course std_id
-        $students = DB::table("students")->select("students.id", "students.name as student_name", "courses.name", "courses.id")->join("courses", "students.id", "=", "courses.student_id")->get();
+        // $students = DB::table("students")->select("students.id", "students.name as student_name", "courses.name", "courses.id")->join("courses", "students.id", "=", "courses.student_id")->get();
 
         // leftJoin means it will go to left side table first which here is students than to other means first select all the rows of left side table than join with right side table
-        $students = DB::table("students")->select("students.id", "students.name as student_name", "courses.name", "courses.id")->leftJoin("courses", "students.id", "=", "courses.student_id")->get();
+        // $students = DB::table("students")->select("students.id", "students.name as student_name", "courses.name", "courses.id")->leftJoin("courses", "students.id", "=", "courses.student_id")->get();
 
         // now in right join it will take the right table first which here is courses
-        $students = DB::table("students")->select("students.id", "students.name as student_name", "courses.name", "courses.id")->rightJoin("courses", "students.id", "=", "courses.student_id")->get();
-
+        // $students = DB::table("students")->select("students.id", "students.name as student_name", "courses.name", "courses.id")->rightJoin("courses", "students.id", "=", "courses.student_id")->get();
 
         echo "<pre>";
         print_r($students);

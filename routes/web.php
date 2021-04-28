@@ -20,7 +20,9 @@ Route::get('about-us', function () {
 // Route::match(["get", "post"], "add-student", [StudentController::class, "myForm"]);
 Route::get("add-student", [StudentController::class, "addStudent"]);
 Route::post("submit-data", [StudentController::class, "submitData"]);
+
 Route::get("list-students", [StudentController::class, "listStudents"]);
+Route::get("save-student", [StudentController::class, "insertStudent"]);
 
 Route::get("users", [StudentController::class, "get_users"]);
 
