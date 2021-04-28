@@ -15,6 +15,22 @@ class StudentController extends Controller
     }
 
     // ------- QUERY BUILDER
+    public function updateInsert(){
+        DB::table("students")->truncate(); // truncate will delete the data and start the new id from 1
+
+        // DB::table("students")->where("id", 2)->delete();
+
+        DB::table("students")->updateOrInsert(
+            ["email" => "email"], // conditions
+            [
+                "name" => "Updated Value of C",
+                "mobile" => "77777777777"
+            ],  // data 
+        );
+
+        echo "Data updated";
+    }
+
     public function insertStudent() {
         //  DB::table("students")->insert([
         //     "name" => "Sanjay",
