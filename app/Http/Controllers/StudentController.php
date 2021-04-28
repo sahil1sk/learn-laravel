@@ -14,6 +14,7 @@ class StudentController extends Controller
         return view("my-form");
     }
 
+    // ------- QUERY BUILDER
     public function listStudents() {
         // $students = DB::table("students")->where("id", 1)->select("name", "email as email_address")->get();
 
@@ -22,8 +23,17 @@ class StudentController extends Controller
         // $students = DB::table("students")->select("name", "email as email_address")->find(1);
 
         // >where("id", ">=", 330) // finding the element where id is greater than equal to 330
-        $students = DB::table("students")->where("email", "like", "%example.org")->select("name", "email as email_address")->get();
+        // $students = DB::table("students")->where("email", "like", "%example.org")->select("name", "email as email_address")->get();
 
+        // $students = DB::table("students")->where("id", 1)->where("name", "Sahil Khanna")->get();
+
+        // $students = DB::table("students")->where("id", 1)->where(function($query){
+        //     $query->where("name", "Sahil Khanna")->orWhere("email", "khannasahil303@gmail.com");
+        // })->get();
+
+        // $students = DB::table("students")->whereBetween("id", [0, 1])->get();
+
+        $students = DB::table("students")->whereIn("id", [0, 1, 2,5])->get();
 
         echo "<pre>";
         print_r($students);
