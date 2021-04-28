@@ -14,6 +14,21 @@ class StudentController extends Controller
         return view("my-form");
     }
 
+    public function listStudents() {
+        // $students = DB::table("students")->where("id", 1)->select("name", "email as email_address")->get();
+
+        // $students = DB::table("students")->where("id", 1)->select("name", "email as email_address")->first();
+
+        // $students = DB::table("students")->select("name", "email as email_address")->find(1);
+
+        // >where("id", ">=", 330) // finding the element where id is greater than equal to 330
+        $students = DB::table("students")->where("email", "like", "%example.org")->select("name", "email as email_address")->get();
+
+
+        echo "<pre>";
+        print_r($students);
+    }
+
 
     // manual validation handling
     public function submitData(Request $req) {
