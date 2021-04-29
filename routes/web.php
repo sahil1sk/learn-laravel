@@ -11,6 +11,17 @@ Route::get('/', function () {
 // 1 route name than 2 view name
 Route::view("noaccess", "noaccess");
 
+// adding routes inside group middleware
+Route::group(["middleware" => ["apprestrict"]], function() {     
+    Route::get('sample1', function () {
+        echo "<h2>Sample 1 Page </h2>";
+    });
+
+    Route::get('sample2', function () {
+        echo "<h2>Sample 2 Page </h2>";
+    });
+});
+
 Route::get('about-us', function () {
     return view('about', [
         "page" => "About Us"
