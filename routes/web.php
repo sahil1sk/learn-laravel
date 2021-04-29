@@ -8,6 +8,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// 1 route name than 2 view name
+Route::view("noaccess", "noaccess");
+
 Route::get('about-us', function () {
     return view('about', [
         "page" => "About Us"
