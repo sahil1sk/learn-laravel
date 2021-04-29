@@ -12,15 +12,20 @@ Route::get('/', function () {
 Route::view("noaccess", "noaccess");
 
 // adding routes inside group middleware
-Route::group(["middleware" => ["apprestrict"]], function() {     
-    Route::get('sample1', function () {
-        echo "<h2>Sample 1 Page </h2>";
-    });
+// Route::group(["middleware" => ["apprestrict"]], function() {     
+//     Route::get('sample1', function () {
+//         echo "<h2>Sample 1 Page </h2>";
+//     });
 
-    Route::get('sample2', function () {
-        echo "<h2>Sample 2 Page </h2>";
-    });
-});
+//     Route::get('sample2', function () {
+//         echo "<h2>Sample 2 Page </h2>";
+//     });
+// });
+
+// so in this way we are able to add specific middleware
+Route::get('sample2', function () {
+    echo "<h2>Sample 2 Page </h2>";
+})->middleware("apprestrict"); 
 
 Route::get('about-us', function () {
     return view('about', [
