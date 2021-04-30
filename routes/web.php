@@ -37,6 +37,7 @@ Route::get('about-us', function () {
 
 
 Route::get("{locale}/service", [serviceController::class, "service"]);
+Route::get("all-students", [serviceController::class, "students"]);
 
 // -------- consuming rest api
 Route::get("/posts", [PostController::class, "index"]);
