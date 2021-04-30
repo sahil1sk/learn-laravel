@@ -7,11 +7,20 @@ use App\Http\Requests\StoreStudentData;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
+use App\Models\Branch;
 
 class StudentController extends Controller
 {
     public function addStudent() {
         return view("my-form");
+    }
+
+    public function listUsers() {
+        // return Student::all();
+        // return Student::find(3)->branch; // so here we calling the function of one to one type which we make in Student model
+
+        // return Branch::all();
+        return Branch::find(2)->student;
     }
 
     // ------- QUERY BUILDER

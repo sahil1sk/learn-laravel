@@ -53,6 +53,7 @@ Route::post("submit-data", [StudentController::class, "submitData"]);
 Route::get("list-students", [StudentController::class, "listStudents"]);
 Route::get("save-student", [StudentController::class, "insertStudent"]);
 
+Route::get("list-users", [StudentController::class, "listUsers"]);
 Route::get("users", [StudentController::class, "get_users"]);
 
 Route::get("adding-student", [StudentController::class, "addStudentByModel"]);
