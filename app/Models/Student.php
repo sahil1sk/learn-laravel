@@ -9,6 +9,14 @@ class Student extends Model
 {
     use HasFactory;
 
+    // Mutators helps to update the values before saving
+    public function setMobileAttribute($value) {
+        $this->attributes["mobile"] = "+91" . $value;
+    }
+
+
+    // ---- Given are Accesors which helps to manupulate values before showing
+
     // this is the accessor method which will help to uppercase the email value
     public function getEmailAttribute($value) {
         return strtoupper($value);
