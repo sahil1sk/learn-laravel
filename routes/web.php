@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\serviceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,6 +36,9 @@ Route::get('about-us', function () {
 });
 
 
+Route::get("{locale}/service", [serviceController::class, "service"]);
+
+// -------- consuming rest api
 Route::get("/posts", [PostController::class, "index"]);
 
 // Route::get("add-student", [StudentController::class, "myForm"]);
