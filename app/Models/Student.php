@@ -15,6 +15,11 @@ class Student extends Model
         return $this->hasOne(Branch::class);
     }
 
+    // one to many
+    public  function branches() {
+        return $this->hasMany(Branch::class);
+    }
+
     // Mutators helps to update the values before saving
     public function setMobileAttribute($value) {
         $this->attributes["mobile"] = "+91" . $value;

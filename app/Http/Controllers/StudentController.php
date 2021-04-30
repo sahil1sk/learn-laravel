@@ -15,12 +15,16 @@ class StudentController extends Controller
         return view("my-form");
     }
 
+    
     public function listUsers() {
-        // return Student::all();
+        // -- one to one
         // return Student::find(3)->branch; // so here we calling the function of one to one type which we make in Student model
+        // return Branch::find(2)->student;
 
-        // return Branch::all();
+        // -- one to many
+        // return Student::find(3)->branches;
         return Branch::find(2)->student;
+
     }
 
     // ------- QUERY BUILDER
