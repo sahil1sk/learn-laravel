@@ -15,11 +15,13 @@ class Student extends Model
     // one to one
     public function branch() {
         return $this->hasOne(Branch::class);
+        // return $this->hasOne(Branch::class, "studentId"); // "studentId" set column name where you want to match the id
     }
 
     // one to many
     public  function branches() {
         return $this->hasMany(Branch::class);
+        // return $this->hasMany(Branch::class, "studentId"); // "studentId" set column name where you want to match the id
     }
 
     // Has one through relationship
@@ -37,6 +39,7 @@ class Student extends Model
     // many to many relationship
     public function roles() {
         return $this->belongsToMany(Role::class);
+        // return $this->belongsToMany(Role::class, "role_student"); // "role_student" set the table name from where you want to get multiple relation data
     }
 
     // Mutators helps to update the values before saving
