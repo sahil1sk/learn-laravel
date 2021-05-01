@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Branch;
 use App\Models\subject;
+use App\Models\Role;
 
 class Student extends Model
 {
@@ -31,6 +32,11 @@ class Student extends Model
     public function subjectList() {
         // 1st pass subject::class which value we want and in 2nd we pass from which class we go 
         return $this->hasManyThrough(subject::class, Branch::class);
+    }
+
+    // many to many relationship
+    public function roles() {
+        return $this->belongsToMany(Role::class);
     }
 
     // Mutators helps to update the values before saving

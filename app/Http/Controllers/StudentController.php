@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Student;
 use App\Models\Branch;
 use App\Models\subject;
+use App\Models\Role;
 
 class StudentController extends Controller
 {
@@ -30,7 +31,11 @@ class StudentController extends Controller
         // return Student::find(3)->subjectInformation;
 
         // --- has many through relation
-        return Student::find(3)->subjectList;
+        // return Student::find(3)->subjectList;
+
+        // --- many to many relationship
+        return Student::find(2)->roles;
+        // return Role::find(2)->getStudents;
     }
 
     // ------- QUERY BUILDER
@@ -40,7 +45,7 @@ class StudentController extends Controller
         // DB::table("students")->where("id", 2)->delete();
 
         DB::table("students")->updateOrInsert(
-            ["email" => "email"], // conditions
+            ["email" => "email@gmail"], // conditions
             [
                 "name" => "Updated Value of C",
                 "mobile" => "77777777777"
