@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Branch;
+use App\Models\subject;
 
 class Student extends Model
 {
@@ -18,6 +19,12 @@ class Student extends Model
     // one to many
     public  function branches() {
         return $this->hasMany(Branch::class);
+    }
+
+    // Has one through relationshipt
+    public function subjectInformation() {
+        // 1st pass subject::class which value we want and in 2nd we pass from which class we go 
+        return $this->hasOneThrough(subject::class, Branch::class);
     }
 
     // Mutators helps to update the values before saving

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
 use App\Models\Branch;
+use App\Models\subject;
 
 class StudentController extends Controller
 {
@@ -23,7 +24,10 @@ class StudentController extends Controller
 
         // -- one to many
         // return Student::find(3)->branches;
-        return Branch::find(2)->student;
+        // return Branch::find(2)->student;
+
+        // --- has one through relation
+        return Student::find(3)->subjectInformation;
 
     }
 
