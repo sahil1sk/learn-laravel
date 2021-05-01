@@ -21,10 +21,16 @@ class Student extends Model
         return $this->hasMany(Branch::class);
     }
 
-    // Has one through relationshipt
+    // Has one through relationship
     public function subjectInformation() {
         // 1st pass subject::class which value we want and in 2nd we pass from which class we go 
         return $this->hasOneThrough(subject::class, Branch::class);
+    }
+
+    // Has many through relationship
+    public function subjectList() {
+        // 1st pass subject::class which value we want and in 2nd we pass from which class we go 
+        return $this->hasManyThrough(subject::class, Branch::class);
     }
 
     // Mutators helps to update the values before saving

@@ -27,8 +27,10 @@ class StudentController extends Controller
         // return Branch::find(2)->student;
 
         // --- has one through relation
-        return Student::find(3)->subjectInformation;
+        // return Student::find(3)->subjectInformation;
 
+        // --- has many through relation
+        return Student::find(3)->subjectList;
     }
 
     // ------- QUERY BUILDER
