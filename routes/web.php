@@ -3,17 +3,18 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Student;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+// this will return the data according to student id
+Route::get('/student/{studentID}', function(Student $studentID) {
+    return $studentID;
+});
+
+// --- This will try to match the email column string from the student table and according to that send back the data 
+Route::get('/student/{studentID:email}', function(Student $studentID) {
+    return $studentID;
+});
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
