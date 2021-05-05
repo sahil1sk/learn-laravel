@@ -13,36 +13,41 @@ class Student extends Model
 {
     use HasFactory;
 
+    // we are also able to create different event file to handle events
+    protected $dispatchesEvents = [
+        "creating" => \App\Events\StudentEvent::class
+    ];
+
     // ---------- Model Events
     // --- To mantain the history which events are fired we will use this all the Log will genereated isnide Log Folder
-    public static function boot() {
-        parent::boot();
+    // public static function boot() {
+    //     parent::boot();
 
-        static::creating(function($item){
-            Log::info("Creating event fired " . $item);
-        });
+    //     static::creating(function($item){
+    //         Log::info("Creating event fired " . $item);
+    //     });
 
-        static::created(function($item){
-            Log::info("Created event fired " . $item);
-        });
+    //     static::created(function($item){
+    //         Log::info("Created event fired " . $item);
+    //     });
         
-        static::updating(function($item){
-            Log::info("Updating event fired " . $item);
-        });
+    //     static::updating(function($item){
+    //         Log::info("Updating event fired " . $item);
+    //     });
         
-        static::updated(function($item){
-            Log::info("Updated event fired " . $item);
-        });
+    //     static::updated(function($item){
+    //         Log::info("Updated event fired " . $item);
+    //     });
         
-        static::deleting(function($item){
-            Log::info("Deleting event fired " . $item);
-        });
+    //     static::deleting(function($item){
+    //         Log::info("Deleting event fired " . $item);
+    //     });
 
-        static::deleted(function($item){
-            Log::info("Deleted event fired " . $item);
-        });
+    //     static::deleted(function($item){
+    //         Log::info("Deleted event fired " . $item);
+    //     });
 
-    }
+    // }
 
     // one to one
     public function branch() {
