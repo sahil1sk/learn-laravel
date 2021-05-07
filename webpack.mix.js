@@ -14,3 +14,8 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css');
+
+// mixing css file with main app.css file that will generate in public folder
+mix.styles([
+    'public/css/custom.css',
+], 'public/css/app.css');

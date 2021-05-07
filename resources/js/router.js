@@ -1,14 +1,24 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import FirstPage from './components/pages/FirstPage'
+
+import home from './components/pages/home'
+import tags from './components/pages/tags'
+
 
 Vue.use(Router)
 
 const routes = [
+    //projects routes....
     {
-        path: '/new',
-        component: FirstPage
-    }
+        path: '/', 
+        component: home, 
+       
+    },
+    {
+        path: '/tags', 
+        component: tags, 
+       
+    },
 ]
 
 export default new Router({
