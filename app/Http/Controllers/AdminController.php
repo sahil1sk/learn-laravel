@@ -9,6 +9,10 @@ class AdminController extends Controller
 {
     public function addTag(Request $request) {
         // dd($request);
+        $this->validate($request, [
+            'tagName' => 'required'
+        ]);
+
         return Tag::create([
             "tagName" => $request->tagName
         ]);
@@ -17,5 +21,23 @@ class AdminController extends Controller
     public function getTag() {
         // order by id in descending order
         return Tag::orderBy("id", "desc")->get();
+    }
+
+    public function editTag(Request $request){
+        // validate request 
+        $this->validate($request, [
+            'tagName' => 'required', 
+            'id' => 'required', 
+        ]);
+        return Tag::where('id', $request->id)->update([
+            'tagName' => $request->tagName
+        ]);
+    }
+    public function deleteTag(Request $request){
+        // validate request 
+        $this->validate($request, [
+            'id' => 'required', 
+        ]);
+        return Tag::where('id', $request->id)->delete();
     }
 }
