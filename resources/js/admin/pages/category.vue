@@ -5,7 +5,7 @@
 				
 				<!--~~~~~~~ TABLE ONE ~~~~~~~~~-->
 				<div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
-					<p class="_title0">Tags <Button @click="addModal=true"><Icon type="md-add" /> Add tag</Button></p>
+					<p class="_title0">Category <Button @click="addModal=true"><Icon type="md-add" /> Add Category</Button></p>
 
 					<div class="_overflow _table_div">
 						<table class="_table" v-if="tags.length">
@@ -44,19 +44,36 @@
 					:closable="false"
 
 					>
-					
+                    
 					<Input v-model="data.tagName" placeholder="Add category name"  />
-					<div style="margin-top: 10px;">
-						<Upload
-							type="drag"
-							:headers="{'x-csrf-token': token}"
-							action="app/upload">
-							<div style="padding: 20px;">
-								<Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-								<p>Click or drag files here to upload</p>
+					<!-- 'X-Requested-With' : 'XMLHttpRequest' means we will sending the file type instead of json data -->
+                    <Upload
+                        ref="uploads"
+                        type="drag"
+                        :headers="{'x-csrf-token' : token, 'X-Requested-With' : 'XMLHttpRequest'}"
+						:on-success="handleSuccess"
+						:on-error="handleError"
+						:format="['jpg','jpeg','png']"
+						:max-size="2048"
+						:on-format-error="handleFormatError"
+						:on-exceeded-size="handleMaxSize"
+                        action="/app/upload">
+                        <div style="padding: 20px 0">
+                            <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+                            <p>Click or drag files here to upload</p>
+                        </div>
+                    </Upload>
+					<div class="demo-upload-list" v-if="data.iconImage">
+						
+							<img :src="`/uploads/${data.iconImage}`">
+							<div class="demo-upload-list-cover">
+								<Icon type="ios-trash-outline" @click="deleteImage"></Icon>
 							</div>
-						</Upload>
+						
+						
 					</div>
+					
+
 
 					<div slot="footer">
 						<Button type="default" @click="addModal=false">Close</Button>
@@ -107,7 +124,8 @@ export default {
 	data(){
 		return {
 			data : {
-				tagName: ''
+				iconImage: '', 
+				categoryName: ''
 			}, 
 			addModal : false, 
 			editModal : false, 
@@ -120,10 +138,12 @@ export default {
 			showDeleteModal: false, 
 			isDeleing : false,
 			deleteItem: {}, 
-			deletingIndex: -1,
-			token: '',
+            deletingIndex: -1, 
+            token: ''
+
 		}
 	},
+
 	methods : {
 		async addTag(){
 			if(this.data.tagName.trim()=='') return this.e('Tag name is required')
@@ -144,6 +164,7 @@ export default {
 				}
 				
 			}
+
 		},
 		async editTag(){
 			if(this.editData.tagName.trim()=='') return this.e('Tag name is required')
@@ -164,6 +185,7 @@ export default {
 				}
 				
 			}
+
 		},
 		showEditModal(tag, index){
 			let obj = {
@@ -185,16 +207,49 @@ export default {
 			}
 			this.isDeleing = false
 			this.showDeleteModal = false
+
 		}, 
 		showDeletingModal(tag, i){
 			this.deleteItem = tag
 			this.deletingIndex = i
 			this.showDeleteModal = true
+
+		}, 
+		handleSuccess (res, file) {
+			this.data.iconImage = res
+		},
+		handleError (res, file) {
+			this.$Notice.warning({
+				title: 'The file format is incorrect',
+				desc: `${file.errors.file.length ? file.errors.file[0] : 'Something went wrong!'}`
+			});
+		},
+		handleFormatError (file) {
+			this.$Notice.warning({
+				title: 'The file format is incorrect',
+				desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+			});
+		},
+		handleMaxSize (file) {
+			this.$Notice.warning({
+				title: 'Exceeding file size limit',
+				desc: 'File  ' + file.name + ' is too large, no more than 2M.'
+			});
+		},
+		async deleteImage(){
+			let image = this.data.iconImage
+			this.data.iconImage = ''
+			this.$refs.uploads.clearFiles()
+			const res = await this.callApi('post', 'app/delete_image', {imageName: image})
+			if(res.status!=200){
+				this.data.iconImage = image
+				this.swr()
+			}
 		}
 	}, 
-	async created(){
-		this.token = window.Laravel.csrfToken;
 
+	async created(){
+        this.token = window.Laravel.csrfToken
 		const res = await this.callApi('get', 'app/get_tags')
 		if(res.status==200){
 			this.tags = res.data
@@ -202,6 +257,8 @@ export default {
 			this.swr()
 		}
 	}
+
+
 	
 }
 </script>

@@ -42,9 +42,26 @@ class AdminController extends Controller
     }
 
     // for uploading files
-    public function upload(Request $request) {
-        $picName = time() . '.'. $request->file->extension();     
+    public function upload(Request $request){
+        $this->validate($request, [
+            'file' => 'required|mimes:jpeg,jpg,png'
+        ]);
+        $picName = time().'.'.$request->file->extension();
         $request->file->move(public_path('uploads'), $picName); // uploading inside public foler inside uploads folder with the name given
-        return $picName;   
+        return $picName;
+    }
+
+    public function deleteImage(Request $request){
+        $fileName = $request->imageName; 
+        $this->deleteFileFromServer($fileName);
+        return 'done';
+    }
+    
+    public function deleteFileFromServer($fileName){
+        $filePath = public_path().'/uploads/'.$fileName;
+        if(file_exists($filePath)){
+            @unlink($filePath); // for deleting the image
+        }
+        return;
     }
 }
