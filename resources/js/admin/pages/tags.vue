@@ -109,8 +109,10 @@ export default {
 			isDeleing : false,
 			deleteItem: {}, 
 			deletingIndex: -1
+
 		}
 	},
+
 	methods : {
 		async addTag(){
 			if(this.data.tagName.trim()=='') return this.e('Tag name is required')
@@ -131,6 +133,7 @@ export default {
 				}
 				
 			}
+
 		},
 		async editTag(){
 			if(this.editData.tagName.trim()=='') return this.e('Tag name is required')
@@ -151,6 +154,7 @@ export default {
 				}
 				
 			}
+
 		},
 		showEditModal(tag, index){
 			let obj = {
@@ -172,13 +176,16 @@ export default {
 			}
 			this.isDeleing = false
 			this.showDeleteModal = false
+
 		}, 
 		showDeletingModal(tag, i){
 			this.deleteItem = tag
 			this.deletingIndex = i
 			this.showDeleteModal = true
+
 		}
 	}, 
+
 	async created(){
 		const res = await this.callApi('get', 'app/get_tags')
 		if(res.status==200){
@@ -187,6 +194,8 @@ export default {
 			this.swr()
 		}
 	}
+
+
 	
 }
 </script>

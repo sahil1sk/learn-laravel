@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    // ------- Tags
     public function addTag(Request $request) {
         // dd($request);
         $this->validate($request, [
@@ -41,7 +43,7 @@ class AdminController extends Controller
         return Tag::where('id', $request->id)->delete();
     }
 
-    // for uploading files
+    // For Uploading Files
     public function upload(Request $request){
         $this->validate($request, [
             'file' => 'required|mimes:jpeg,jpg,png'
@@ -63,5 +65,33 @@ class AdminController extends Controller
             @unlink($filePath); // for deleting the image
         }
         return;
+    }
+
+    // ----- Category
+    public function addCategory(Request $request){
+        // validate request 
+        $this->validate($request, [
+            'categoryName' => 'required',
+            'iconImage' => 'required',
+        ]);
+        return Category::create([
+            'categoryName' => $request->categoryName,
+            'iconImage' => $request->iconImage,
+        ]);
+    }
+    public function getCategory(){
+        // getting category by id in descending order
+        return Category::orderBy('id', 'desc')->get();
+    }
+    public function editCategory(Request $request){
+        // validate request 
+        $this->validate($request, [
+            'categoryName' => 'required',
+            'iconImage' => 'required',
+        ]);
+        return Category::where('id', $request->id)->update([
+            'categoryName' => $request->categoryName,
+            'iconImage' => $request->iconImage,
+        ]);
     }
 }
