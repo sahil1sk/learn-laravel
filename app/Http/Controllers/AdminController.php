@@ -40,4 +40,11 @@ class AdminController extends Controller
         ]);
         return Tag::where('id', $request->id)->delete();
     }
+
+    // for uploading files
+    public function upload(Request $request) {
+        $picName = time() . '.'. $request->file->extension();     
+        $request->file->move(public_path('uploads'), $picName); // uploading inside public foler inside uploads folder with the name given
+        return $picName;   
+    }
 }

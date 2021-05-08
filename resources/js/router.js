@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import home from './components/pages/home'
-import tags from './components/pages/tags'
+import tags from './admin/pages/tags'
+import category from './admin/pages/category'
 
 
 Vue.use(Router)
@@ -16,8 +17,11 @@ const routes = [
     },
     {
         path: '/tags', 
-        component: tags, 
-       
+        component: tags,  
+    },
+    {
+        path: '/category', 
+        component: category,  
     },
 ]
 
