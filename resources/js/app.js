@@ -2,6 +2,7 @@ import Vue from 'vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap'
 import router from './router'
+import store from './store'
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import common from './common';
@@ -14,5 +15,6 @@ Vue.use(ViewUI);
 new Vue({
     el: '#app',
     render: h => h(MainComponent),
-    router
+    router,
+    store
 });
