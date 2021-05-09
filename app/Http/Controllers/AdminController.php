@@ -59,8 +59,13 @@ class AdminController extends Controller
         return 'done';
     }
     
-    public function deleteFileFromServer($fileName){
-        $filePath = public_path().'/uploads/'.$fileName;
+    public function deleteFileFromServer($fileName, $hasFullPath = false){
+        if(!$hasFullPath) {
+            $filePath = public_path().'/uploads/'.$fileName;
+        } else {
+            $filePath = public_path() . $fileName;
+        }
+
         if(file_exists($filePath)){
             @unlink($filePath); // for deleting the image
         }
@@ -79,10 +84,12 @@ class AdminController extends Controller
             'iconImage' => $request->iconImage,
         ]);
     }
+
     public function getCategory(){
         // getting category by id in descending order
         return Category::orderBy('id', 'desc')->get();
     }
+    
     public function editCategory(Request $request){
         // validate request 
         $this->validate($request, [
@@ -93,5 +100,14 @@ class AdminController extends Controller
             'categoryName' => $request->categoryName,
             'iconImage' => $request->iconImage,
         ]);
+    }
+
+    public function deleteCategory(Request $request) {
+        $this->deleteFileFromServer($request->iconImage, true);        
+
+        $this->validate($request, [
+            'id' => 'required', 
+        ]);
+        return Category::where('id', $request->id)->delete();
     }
 }

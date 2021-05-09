@@ -127,21 +127,8 @@
 					</div>
 
 				</Modal>
-				<!-- delete alert modal -->
-				<Modal v-model="showDeleteModal" width="360">
-					<p slot="header" style="color:#f60;text-align:center">
-						<Icon type="ios-information-circle"></Icon>
-						<span>Delete confirmation</span>
-					</p>
-					<div style="text-align:center">
-						<p>Are you sure you want to delete category?.</p>
-						
-					</div>
-					<div slot="footer">
-						<Button type="error" size="large" long :loading="isDeleing" :disabled="isDeleing" @click="deleteCategory" >Delete</Button>
-					</div>
-				</Modal>
-				
+
+				<DeleteModal></DeleteModal>
 
 			</div>
 		</div>
@@ -150,7 +137,11 @@
 
 
 <script>
+import DeleteModal from '../components/deleteModal.vue'
+import { mapGetters } from 'vuex'
+
 export default {
+	components: {DeleteModal},
 	data(){
 		return {
 			data : {
@@ -260,10 +251,14 @@ export default {
 
 		}, 
 		showDeletingModal(category, i){
-			this.deleteItem = category
-			this.deletingIndex = i
-			this.showDeleteModal = true
-
+			const deleteModalObj = {
+				showDeleteModal: true,
+				deleteUrl: 'app/delete_category',
+				data: category,
+				deletingIndex: i,
+				isDeleted: false,
+			};
+			this.$store.commit('setDeletingModalObj', deleteModalObj);	
 		}, 
 		handleSuccess (res, file) {
 			res = `/uploads/${res}`
@@ -323,8 +318,17 @@ export default {
 		}else{
 			this.swr()
 		}
+	},
+	computed: {
+		...mapGetters(['getDeleteModalObj'])	
+	},
+	watch: {
+		getDeleteModalObj(obj) {
+			if(obj.isDeleted) {
+				this.categoryLists.splice(obj.deletingIndex, 1);
+			}
+		}
 	}
-
 
 	
 }
