@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import home from './components/pages/home'
 import tags from './admin/pages/tags'
 import category from './admin/pages/category'
+import adminusers from './admin/pages/adminusers'
 
 
 Vue.use(Router)
@@ -22,6 +23,10 @@ const routes = [
     {
         path: '/category', 
         component: category,  
+    },
+    {
+        path: '/adminusers', 
+        component: adminusers,  
     },
 ]
 
