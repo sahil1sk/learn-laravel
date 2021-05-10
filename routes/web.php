@@ -14,25 +14,25 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::post("app/create_tag", [AdminController::class, "addTag"]);
-Route::get("app/get_tags", [AdminController::class, "getTag"]);
-Route::post("app/edit_tag", [AdminController::class, "editTag"]);
-Route::post("app/delete_tag", [AdminController::class, "deleteTag"]);
+Route::prefix('app')->middleware(["adminCheck"])->group(function() {
+    Route::post("/create_tag", [AdminController::class, "addTag"]);
+    Route::get("/get_tags", [AdminController::class, "getTag"]);
+    Route::post("/edit_tag", [AdminController::class, "editTag"]);
+    Route::post("/delete_tag", [AdminController::class, "deleteTag"]);
 
-Route::post("app/upload", [AdminController::class, "upload"]);
-Route::post('app/delete_image', [AdminController::class, "deleteImage"]);
-Route::post('app/create_category', [AdminController::class, "addCategory"]);
-Route::get('app/get_category', [AdminController::class, "getCategory"]);
-Route::post('app/edit_category', [AdminController::class, "editCategory"]);
-Route::post('app/delete_category', [AdminController::class, "deleteCategory"]);
+    Route::post("/upload", [AdminController::class, "upload"]);
+    Route::post('/delete_image', [AdminController::class, "deleteImage"]);
+    Route::post('/create_category', [AdminController::class, "addCategory"]);
+    Route::get('/get_category', [AdminController::class, "getCategory"]);
+    Route::post('/edit_category', [AdminController::class, "editCategory"]);
+    Route::post('/delete_category', [AdminController::class, "deleteCategory"]);
 
-Route::post('app/create_user', [AdminController::class, "createUser"]);
-Route::post('app/edit_user', [AdminController::class, "editUser"]);
-Route::get('app/get_users', [AdminController::class, "getUsers"]);
+    Route::post('/create_user', [AdminController::class, "createUser"]);
+    Route::post('/edit_user', [AdminController::class, "editUser"]);
+    Route::get('/get_users', [AdminController::class, "getUsers"]);
+});
 
 Route::post('app/admin_login', [AdminController::class, "adminLogin"]);
-
-
 
 Route::get('logout', [AdminController::class, "logout"]);
 Route::get('/', [AdminController::class, "index"]);
