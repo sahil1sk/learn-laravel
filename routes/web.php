@@ -30,12 +30,22 @@ Route::post('app/create_user', [AdminController::class, "createUser"]);
 Route::post('app/edit_user', [AdminController::class, "editUser"]);
 Route::get('app/get_users', [AdminController::class, "getUsers"]);
 
+Route::post('app/admin_login', [AdminController::class, "adminLogin"]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-// ---- when we set then we will able to go to vue routers also in this way
-Route::get('{slug}', function () {
-    return view('welcome');
-});
+
+Route::get('logout', [AdminController::class, "logout"]);
+Route::get('/', [AdminController::class, "index"]);
+Route::any('{slug}', [AdminController::class, "index"]);
+
+
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// // ---- when we set then we will able to go to vue routers also in this way
+// Route::get('{slug}', function () {
+//     return view('welcome');
+// });

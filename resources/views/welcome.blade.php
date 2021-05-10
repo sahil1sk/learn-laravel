@@ -13,6 +13,14 @@
                   csrfToken: '{{ csrf_token() }}'  
                 };
             })();
+
+            // --- Setting user detail in local storage
+            var userDetail;
+            @if(Auth::check())
+                userDetail =  @json(Auth::user())
+            @endif
+
+            localStorage.setItem("user", JSON.stringify(userDetail));
         </script>
     </head>
     <body>
