@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
 use App\Models\Student;
+use App\Http\Controllers\DeviceController;
+
+Route::get("devices", [DeviceController::class, "getStudentsData"]);
 
 Route::get("test", function() {
     echo url("call/5") . "<br>";
