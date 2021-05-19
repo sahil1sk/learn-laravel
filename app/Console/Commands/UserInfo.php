@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\User;
 
 class UserInfo extends Command
 {
@@ -37,8 +38,23 @@ class UserInfo extends Command
      */
     public function handle()
     {
-        $name = $this->ask('What is your name?');
-        $email = $this->ask('What is your email?');
-        $this->info('The User info is: ' . $name . " " . $email);
+        $name = $this->ask('Enter your name?');
+        $email = $this->ask('Enter your email?');
+        $password = bcrypt($this->ask('Enter your password?'));
+        $this->info('The User info is: ' . $name . " " . $email . " " . $password);
+
+        $input["name"] = $name;
+        $input["email"] = $email;
+        $input["password"] = $password;
+
+        User::create($input);
+
+        $this->info("User created successfully!");
+
+        // --- Listing user data in table format
+        $this->table(
+            ['ID', 'Name', 'Email'],
+            User::all(['id', 'name', 'email'])->toArray()
+        );
     }
 }
