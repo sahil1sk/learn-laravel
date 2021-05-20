@@ -8,6 +8,7 @@ use App\Scopes\StatusScope;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
+use App\Mail\MarkMail;
 
 class DeviceController extends Controller
 {
@@ -34,6 +35,17 @@ class DeviceController extends Controller
         ];
 
         Mail::to("khannasahil303@gmail.com")->send(new TestMail($details));
+
+        echo "<h3> Mail sent successfully! </h3>";
+    }
+
+    public function sendMarkDownMail() {
+        $details = [
+            "title" => "Sample Mail",
+            "body" => "Sample body",
+        ];
+
+        Mail::to("khannasahil303@gmail.com")->send(new MarkMail($details));
 
         echo "<h3> Mail sent successfully! </h3>";
     }
