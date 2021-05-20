@@ -45,6 +45,7 @@ class DeviceController extends Controller
             "body" => "Sample body",
         ];
 
+        // ------- Sending Mail To the person
         Mail::to("khannasahil303@gmail.com")->send(new MarkMail($details));
 
         echo "<h3> Mail sent successfully! </h3>";

@@ -11,6 +11,8 @@ class MarkMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $subject = "Changing Subject"; 
+
     public $details;
 
     /**
@@ -31,5 +33,7 @@ class MarkMail extends Mailable
     public function build()
     {
         return $this->markdown('emails.sample-markdown');
+        // another way to send mail
+        // return $this->subject("Test Mail From Laravel")->markdown('emails.sample-markdown');
     }
 }
