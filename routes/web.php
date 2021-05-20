@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Http\Controllers\DeviceController;
 
 Route::get("devices", [DeviceController::class, "getStudentsData"]);
+Route::get("send-mail", [DeviceController::class, "sendMail"]);
 
 Route::get("test", function() {
     echo url("call/5") . "<br>";
